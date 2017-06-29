@@ -9,9 +9,10 @@ interface HelloWorld{
 
 const Hello = (props: HelloWorld)=>{
   console.log(`${props.hello} ${props.world}`);
-}
+};
 
+console.log('Hello')
 Hello({
   hello: 'Hello',
-  world: 'world!!!'
+  world: 'world'
 });
