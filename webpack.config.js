@@ -1,9 +1,10 @@
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanCSSPlugin = require("less-plugin-clean-css");
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  entry: "./app/index.ts",
+  entry: "./app/index.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
@@ -11,7 +12,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.ts?$/,
+        test: /\.(ts|tsx)?$/,
         include: [
           path.resolve(__dirname, "app")
         ],
@@ -40,8 +41,20 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin({
-        filename: '[name].css',
-        allChunks: true
-    })
-]
+      filename: '[name].css',
+      allChunks: true
+    }),
+    new UglifyJSPlugin({
+      compress: true,
+      sourceMap: true
+    }),
+  ],
+  devtool: "source-map",
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".json"]
+  },
+  externals: {
+    "react": "React",
+    "react-dom": "ReactDOM"
+  },
 };

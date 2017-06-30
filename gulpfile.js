@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const clean = require('gulp-clean');
-const shell = require('gulp-shell')
+const shell = require('gulp-shell');
+const newer = require('gulp-newer');
 
 gulp.task('clean', function () {
     return gulp.src('dist/*', {read: false})
@@ -12,8 +13,22 @@ gulp.task('copy', function () {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('build', shell.task([
+gulp.task('webpack', shell.task([
   'webpack --colors -w'
 ]))
 
-gulp.task('default', ['clean', 'copy', 'build']);
+gulp.task('build', ['webpack', 'copy', 'copy-react', 'copy-react-dom'])
+
+gulp.task('copy-react', function() {
+  return gulp.src('node_modules/react/dist/react.min.js')
+    .pipe(gulp.dest('dist/vendor/'));
+});
+
+gulp.task('copy-react-dom', function() {
+  return gulp.src('node_modules/react-dom/dist/react-dom.min.js')
+    .pipe(gulp.dest('dist/vendor/'));
+});
+
+gulp.task('default', ['clean'], () =>{
+  gulp.run('build')
+});
