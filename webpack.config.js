@@ -1,7 +1,32 @@
 const path = require("path");
+
+const OPTIMIZE = process.env.OPTIMIZE ? JSON.parse(process.env.OPTIMIZE) : false;
+
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanCSSPlugin = require("less-plugin-clean-css");
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
+const plugins = [];
+const lessPlugins = [];
+
+plugins.push(new ExtractTextPlugin({
+  filename: 'css/[name].css',
+  allChunks: true
+}));
+
+if (OPTIMIZE) {
+
+  plugins.push(
+    new UglifyJSPlugin({
+      compress: true,
+      sourceMap: true,
+    })
+  );
+
+  lessPlugins.push(
+    new CleanCSSPlugin()
+  );
+}
 
 module.exports = {
   entry: "./app/index.tsx",
@@ -32,24 +57,15 @@ module.exports = {
           }, {
             loader: 'less-loader',
             options: {
-              plugins: [ new CleanCSSPlugin({ advanced: true }) ]
+              plugins: lessPlugins
             }
           }]
         })
       }
     ]
   },
-  plugins: [
-    new ExtractTextPlugin({
-      filename: '[name].css',
-      allChunks: true
-    }),
-    new UglifyJSPlugin({
-      compress: true,
-      sourceMap: true
-    }),
-  ],
-  devtool: "source-map",
+  plugins: plugins,
+  devtool: OPTIMIZE? "" : "source-map" ,
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"]
   },

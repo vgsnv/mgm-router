@@ -14,7 +14,7 @@ gulp.task('copy', function () {
 });
 
 gulp.task('webpack', shell.task([
-  'webpack --colors -w'
+  'webpack --colors --progress -w'
 ]))
 
 gulp.task('build', ['webpack', 'copy', 'copy-react', 'copy-react-dom'])
