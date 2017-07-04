@@ -67,6 +67,12 @@ module.exports = {
   plugins: plugins,
   devtool: OPTIMIZE? "" : "source-map" ,
   resolve: {
+    alias: {
+      components: path.resolve(__dirname, 'app/components/'),
+      store: path.resolve(__dirname, 'app/store/'),
+      views: path.resolve(__dirname, 'app/views/'),
+      api: path.resolve(__dirname, 'app/api/'),
+    },
     extensions: [".ts", ".tsx", ".js", ".json"]
   },
   externals: {
