@@ -1,0 +1,33 @@
+@import "../General";
+
+@colorBack: #f5f5f5;
+@colorFont: #424242;
+
+.btn-enabled{
+  padding: 2*@hpd 3*@hpd;
+  margin:-right 2*@hpd;
+  border: @colorFont solid 2px;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  color: @colorFont;
+  background: @colorBack;
+  font:-size 1em;
+  hover{
+    color: @colorBack;
+    background: @colorFont;
+  }
+}
+
+.btn-disabled{
+  padding: 2*@hpd 3*@hpd;
+  margin:-right 2*@hpd;
+  border: lighten(@colorFont, 40) solid 2px;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  color: darken(@colorFont, 40);
+  background: darken(@colorBack, 40);
+  font:-size 1em;
+}

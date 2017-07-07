@@ -1,0 +1,25 @@
+@pd: 8px;
+@hpd: @pd/2;
+@mainColor: #ccc;
+@secondColor: darken(@mainColor, 40%);
+
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+#main{
+  width: 100%;
+  margin: 0;
+  padding: @pd @pd;
+  position: relative;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+table, th, td {
+  border: 1px solid @secondColor;
+  padding: @pd @hpd;
+}
