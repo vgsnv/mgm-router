@@ -19,7 +19,7 @@ export class Header extends React.Component<Props & Dispatch, State>{
     return(<uc.Row>
           <header id={css.header} >
             <uc.Row>
-              <h1>Managment Articles</h1>
+              <h1>Managment Routes</h1>
             </uc.Row>
           </header> 
       </uc.Row>);

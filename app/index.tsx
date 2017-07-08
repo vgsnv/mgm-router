@@ -6,7 +6,8 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from 'store/store';
 import { activePageChange } from 'store/app/activePage';
 
-import Header from 'components/Header/HeaderCont';
+import About from 'views/About';
+import Home from 'views/Home';
 
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -23,7 +24,7 @@ store.dispatch(activePageChange('hello'));
 
 ReactDOM.render(
   <Provider store={store}>
-    <Header/>
+    <Home/>
   </Provider>,
   document.getElementById('root')
 );
